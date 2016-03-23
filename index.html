@@ -7,9 +7,33 @@
         <link rel="stylesheet" href="css/index.css" />
     </head>
     <body>
-        <div id="main" class="container"></div>
+        <ul id="top-nav">
+            <li data-menuanchor="page-1" class="active">
+                <a href="#page-1">First section</a>
+            </li>
+            <li data-menuanchor="page-2">
+                <a href="#page-2">Second section</a>
+            </li>
+            <li data-menuanchor="page-3">
+                <a href="#page-3">Third section</a>
+            </li>
+        </ul>
+        <div id="main" class="container">
+            <div class="section" data-anchor="page-1">
+                page1
+            </div>
+            <div class="section" data-anchor="page-2">
+                <div id="map-area">
+                    page2
+                </div>
+            </div>
+            <div class="section" data-anchor="page-3">
+                page3
+            </div>
+        </div>
         <script src="js/jquery-1.12.2.min.js"></script>
         <script src="js/echarts.js"></script>
+        <script src="js/jquery.fullPage.js"></script>
         <script src="js/geoCoordMap.js"></script>
         <script src="js/index.js"></script>
     </body>
