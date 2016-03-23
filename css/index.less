@@ -1,5 +1,7 @@
 @import (less) 'normalize.css';
 @import (less) 'jquery.fullPage.css';
+
+// pre classes
 .fill {
     position: absolute;
     top: 0;
@@ -8,12 +10,61 @@
     height: 100%;
 }
 
+.blur(@px) {
+    -webkit-filter: blur(@px);
+       -moz-filter: blur(@px);
+        -ms-filter: blur(@px);
+            filter: blur(@px);
+}
+
+
+// colors
+@bc: #53a0cf;       // background
+@fc: #fff;       // fore
+
+
+// common
+html {
+    font-size: 62.5%;
+}
+body {
+    font-size: 1.4rem;
+    background-color: @bc;
+}
+* {
+    font-family: "Helvetica Neue", Ubuntu, "Hiragino Sans GB", "WenQuanYi Micro Hei", sans-serif, STHei,"Microsoft YaHei","微软雅黑","华文黑体";
+}
+
+
+// detailed
+
+.text-area {
+    width: 24em;
+    margin: 0 auto;
+    color: @fc;
+    line-height: 2.4rem;
+    .title {
+        font-size: 3rem;
+    }
+    .group {
+        .label {
+            display: inline-block;
+            width: 5em;
+            vertical-align: top;
+        }
+        .content {
+            display: inline-block;
+            vertical-align: top;
+        }
+    }
+}
 
 #top-nav {
     position: absolute;
     top: 0;
     left: 0;
     z-index: 2;
+    display: none;
     li {
         display: inline-block;
         list-style: none;
@@ -28,4 +79,56 @@
 }
 #map-area {
     .fill;
+}
+
+#section-1 {
+    .text-area {
+        .content {
+            text-indent: 2em;
+            height: 15rem;
+        }
+    }
+}
+
+
+#fp-nav {
+    ul {
+        li {
+            a {
+                &.active {
+                    span {
+                        background-color: @fc;
+                        color: @fc;
+                    }
+                }
+                span {
+                    background-color: darken(@bc, 50%)
+                }
+            }
+            .fp-tooltip {
+                color: @fc;
+            }
+        }
+    }
+}
+
+#section-4 {
+    #chart-area {
+        .fill;
+        z-index: -1;
+    }
+}
+
+#section-5 {
+    .text-area {
+        display: inline-block;
+        width: auto;
+        margin: 0 auto;
+    }
+    .fp-tableCell {
+        text-align: center;
+        .text-area {
+            text-align: left;
+        }
+    }
 }

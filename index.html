@@ -3,38 +3,81 @@
     <head>
         <meta charset="utf-8" />
         <meta name="author" content="slr" />
-        <title>temperature</title>
+        <title>the cold wave</title>
         <link rel="stylesheet" href="css/index.css" />
     </head>
     <body>
         <ul id="top-nav">
             <li data-menuanchor="page-1" class="active">
-                <a href="#page-1">First section</a>
+                <a href="#page-1">section-1</a>
             </li>
             <li data-menuanchor="page-2">
-                <a href="#page-2">Second section</a>
+                <a href="#page-2">section-2</a>
             </li>
             <li data-menuanchor="page-3">
-                <a href="#page-3">Third section</a>
+                <a href="#page-3">section-3</a>
+            </li>
+            <li data-menuanchor="page-4">
+                <a href="#page-4">section-4</a>
+            </li>
+            <li data-menuanchor="page-5">
+                <a href="#page-5">section-5</a>
             </li>
         </ul>
         <div id="main" class="container">
-            <div class="section" data-anchor="page-1">
-                page1
+            <div class="section" id="section-1" data-anchor="page-1">
+                <div class="text-area">
+                    <h1 class="title">寒潮</h1>
+                    <div class="content">
+
+                    </div>
+                </div>
             </div>
             <div class="section" data-anchor="page-2">
                 <div id="map-area">
-                    page2
                 </div>
             </div>
             <div class="section" data-anchor="page-3">
-                page3
+
+            </div>
+            <div class="section" id="section-4" data-anchor="page-4">
+                <div class="text-area">
+                    寒潮的成因通常较为复杂，它与全球气候变化密不可分
+                </div>
+                <div class="" id="chart-area">
+
+                </div>
+            </div>
+            <div class="section" id="section-5" data-anchor="page-5">
+                <div class="text-area">
+                    <div class="group">
+                        <span class="label">数据来源：</span>
+                        <span class="content">
+                            中央气象台<br/>
+                            NASA’s Goddard Institute for Space<br/>
+                            NOAA（美国国家海洋和大气管理局<br/>
+                        </span>
+                    </div>
+                    <div class="group">
+                        <span class="label">内容整理：</span>
+                        <span class="content">赵钒君 张延坤</span>
+                    </div>
+                    <div class="group">
+                        <span class="label">网页设计：</span>
+                        <span class="content">高晓宇</span>
+                    </div>
+                    <div class="group">
+                        <span class="label">网页制作：</span>
+                        <span class="content">孙立人</span>
+                    </div>
+                </div>
             </div>
         </div>
         <script src="js/jquery-1.12.2.min.js"></script>
         <script src="js/echarts.js"></script>
         <script src="js/jquery.fullPage.js"></script>
         <script src="js/geoCoordMap.js"></script>
+        <script src="js/myChart.js"></script>
         <script src="js/index.js"></script>
     </body>
 </html>
