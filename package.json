@@ -18,5 +18,9 @@
   "bugs": {
     "url": "https://github.com/SLRXXX/coldwave/issues"
   },
-  "homepage": "https://github.com/SLRXXX/coldwave#readme"
+  "homepage": "https://github.com/SLRXXX/coldwave#readme",
+  "devDependencies": {
+    "front-end-guide": "^0.5.6",
+    "gulp": "^3.9.1"
+  }
 }

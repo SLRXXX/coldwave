@@ -127,7 +127,7 @@ body {
             width: 6px;
             height: 15px;
             background-color: @fc;
-            transition: left 2s;
+            transition: left 2s linear;
         }
         .info {
             position: absolute;
@@ -160,6 +160,34 @@ body {
             text-align: right;
             padding-right: 2em;
             padding-bottom: 2em;
+        }
+    }
+    .city-chart-area {
+        //display: none;
+        position: absolute;
+        top: 30%;
+        right: 0;
+        width: 25%;
+        height: 40%;
+        margin: 0;
+        margin-right: 3em;
+        &.active {
+            display: block;
+        }
+        .city-chart-container {
+            .fill;
+            background-color: #89b4d5;
+            color: @bc;
+        }
+        .city-chart {
+            position: absolute;
+            height: 60%;
+            top: auto;
+            bottom: 5%;
+            width: 90%;
+            left: 5%;
+            border-radius: 3px;
+            overflow: hidden;
         }
     }
 }

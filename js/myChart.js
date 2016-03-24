@@ -2,7 +2,7 @@
 * @Author: slr
 * @Date:   2016-03-23 14:53:57
 * @Last Modified by:   slr
-* @Last Modified time: 2016-03-24 18:09:06
+* @Last Modified time: 2016-03-24 21:26:18
 */
 
 'use strict';
@@ -16,15 +16,6 @@ var renderChartOne = function () {
             backgroundColor: backColor,
             textStyle: {
                 fontSize: 14
-            },
-            title: {
-                text: '',
-                subtext: '',
-                sublink: '',
-                left: 'center',
-                textStyle: {
-                    color: '#318fd1'
-                }
             },
             tooltip: {
                 trigger: 'item',
@@ -169,8 +160,8 @@ var renderChartOne = function () {
     };
 
 
-    myChart.on('click', function (params) {
-        console.log(params);
+    myChart.on('click', function (param) {
+        renderCityChart(param.name);
     });
     window.myChart = myChart;
     return myChart;
@@ -178,3 +169,103 @@ var renderChartOne = function () {
 
 
 var renderChartTwo = function () {;};
+var renderCityChart = function (city) {
+    $('.city-info .city-name').text(city);
+
+    var cityChart = echarts.init(document.getElementById('city-chart'));
+    var mins = [];
+    var maxs = [];
+    var means = [];
+    for (var i = 0; i < weatherData.length; i++) {
+        var wd = weatherData[i].wdata;
+        for (var j = 0, lj = wd.length; j < lj; j++) {
+            var t = wd[j];
+            if (t.name === city) {
+                mins.push(t.min);
+                maxs.push(t.max);
+                means.push(t.mean);
+                break;
+            }
+        }
+    }
+    var option = {
+        tooltip: {
+            trigger: 'axis'
+        },
+        xAxis:  {
+            type: 'category',
+            data: ['21','22','23','24','25'],
+            axisLabel: {
+                textStyle: {
+                    color: '#fff',
+                    fontSize: 12
+                }
+            },
+            nameGap: 8,
+            splitLine: {
+                show: false
+            },
+            axisTick: {
+                show: false
+            },
+            axisLine: {
+                lineStyle: {
+                    color: '#89b4d5'
+                }
+            }
+        },
+        yAxis: {
+            type: 'value',
+            axisLabel: {
+                formatter: '{value} °C',
+                textStyle: {
+                    color: '#fff',
+                    fontSize: 11
+                }
+            },
+            nameTextStyle: {
+                color: '#fff'
+            },
+            splitLine: {
+                show: false
+            },
+            axisLine: {
+                lineStyle: {
+                    color: '#89b4d5'
+                }
+            },
+            axisTick: {
+                lineStyle: {
+                    color: '#89b4d5'
+                },
+                show: false
+            }
+        },
+        grid: {
+            top: '8%',
+            left: '2%',
+            bottom: '2%',
+            right: '8%',
+            containLabel: true
+        },
+        backgroundColor: '#2462a2',
+        series: [
+            {
+                name:'最高气温',
+                type:'line',
+                data: maxs
+            },{
+                name: '平均气温',
+                type: 'line',
+                data: means
+            },
+            {
+                name:'最低气温',
+                type:'line',
+                data: mins
+            }
+        ]
+    };
+
+    cityChart.setOption(option, true);
+};
