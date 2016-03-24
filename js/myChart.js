@@ -2,7 +2,7 @@
 * @Author: slr
 * @Date:   2016-03-23 14:53:57
 * @Last Modified by:   slr
-* @Last Modified time: 2016-03-25 00:14:28
+* @Last Modified time: 2016-03-25 00:18:34
 */
 
 'use strict';
@@ -197,6 +197,11 @@ var renderCityChart = function (city) {
             formatter: '{b}日<br/>{a0}: {c0}<br/>{a1}: {c1}<br/>{a2}: {c2}',
             textStyle: {
                 fontSize: 11
+            },
+            axisPointer: {
+                lineStyle: {
+                    color: '#89b4d5'
+                }
             }
         },
         xAxis:  {
