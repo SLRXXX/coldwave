@@ -2,7 +2,7 @@
 * @Author: slr
 * @Date:   2016-03-23 14:53:57
 * @Last Modified by:   slr
-* @Last Modified time: 2016-03-24 16:19:24
+* @Last Modified time: 2016-03-24 16:26:05
 */
 
 'use strict';
@@ -126,6 +126,7 @@ var renderChartOne = function () {
     $.get('data/china.json').then(function (chinaJson) {
         $.get('data/weather.json').then(function (weatherJson) {
             myChart.hideLoading();
+            console.log('hideLoading');
 
             var data = $.parseJSON(weatherJson)[0].wdata;
             console.log(data);
