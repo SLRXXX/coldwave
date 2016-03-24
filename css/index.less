@@ -156,7 +156,7 @@ body {
             position: absolute;
             bottom: 0;
             right: 0;
-            color: @fc;
+            color: @mc;
             text-align: right;
             padding-right: 2em;
             padding-bottom: 2em;
@@ -179,6 +179,9 @@ body {
             background-color: #89b4d5;
             color: @bc;
         }
+        .city-info {
+            padding: 5%;
+        }
         .city-chart {
             position: absolute;
             height: 60%;
@@ -187,7 +190,7 @@ body {
             width: 90%;
             left: 5%;
             border-radius: 3px;
-            overflow: hidden;
+            // overflow: hidden;
         }
     }
 }
@@ -198,12 +201,12 @@ body {
             a {
                 &.active {
                     span {
-                        background-color: @fc;
-                        color: @fc;
+                        background-color: @mc;
+                        color: @mc;
                     }
                 }
                 span {
-                    background-color: lighten(@bc, 50%)
+                    background-color: darken(@mc, 30%);
                 }
             }
             .fp-tooltip {

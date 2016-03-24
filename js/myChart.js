@@ -2,7 +2,7 @@
 * @Author: slr
 * @Date:   2016-03-23 14:53:57
 * @Last Modified by:   slr
-* @Last Modified time: 2016-03-24 21:26:18
+* @Last Modified time: 2016-03-24 23:27:38
 */
 
 'use strict';
@@ -27,7 +27,8 @@ var renderChartOne = function () {
                 min: -30,
                 max: 30,
                 calculable: true,
-                color: ['#d7eeff','#318fd1','#023960'],
+                color: ['#e89183', '#c0da70', '#318fd1'],
+                //color: ['#d7eeff','#318fd1','#023960'],
                 textStyle: {
                     color: '#fff'
                 }
@@ -201,7 +202,7 @@ var renderCityChart = function (city) {
                     fontSize: 12
                 }
             },
-            nameGap: 8,
+            nameGap: 0,
             splitLine: {
                 show: false
             },
