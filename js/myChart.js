@@ -2,7 +2,7 @@
 * @Author: slr
 * @Date:   2016-03-23 14:53:57
 * @Last Modified by:   slr
-* @Last Modified time: 2016-03-24 17:02:00
+* @Last Modified time: 2016-03-24 18:09:06
 */
 
 'use strict';
@@ -11,9 +11,7 @@ var backColor = $('body').css('background-color');
 
 var renderChartOne = function () {
     var myChart = echarts.init(document.getElementById('map-area'));
-
     var initChart = function (data) {
-
         var option = {
             backgroundColor: backColor,
             textStyle: {
@@ -79,7 +77,6 @@ var renderChartOne = function () {
                     name: '平均气温',
                     type: 'scatter',
                     coordinateSystem: 'geo',
-                    data: data,
                     symbolSize: 14,
                     label: {
                         normal: {
@@ -111,9 +108,8 @@ var renderChartOne = function () {
             ]
         };
         myChart.setOption(option, true);
+        myChart.renderData(data);
     };
-
-
 
     myChart.showLoading('default', {
         text: '加载中...',
@@ -126,6 +122,7 @@ var renderChartOne = function () {
     $.get('data/china.json').then(function (chinaJson) {
         $.get('data/weather.json').then(function (weatherJson) {
             myChart.hideLoading();
+            window.weatherData = weatherJson;
             var data = weatherJson[0].wdata;
             var convertData = function (data) {
                 var res = [];
@@ -147,13 +144,37 @@ var renderChartOne = function () {
                     map: 'china'
                 }]
             });
-            initChart(convertData(data));
+            initChart(data);
         });
     });
+
+    myChart.convertData = function (data) {
+        var res = [];
+        for (var i = 0; i < data.length; i++) {
+            var geoCoord = geoCoordMap[data[i].name];
+            if (geoCoord) {
+                res.push({
+                    name: data[i].name,
+                    value: geoCoord.concat(data[i].mean)
+                });
+            }
+        }
+        return res;
+    }
+    myChart.renderData = function (data) {
+        data = myChart.convertData(data);
+        var option = myChart.getOption();
+        option.series[0].data = data;
+        myChart.setOption(option, true);
+    };
 
 
     myChart.on('click', function (params) {
         console.log(params);
     });
+    window.myChart = myChart;
     return myChart;
 };
+
+
+var renderChartTwo = function () {;};

@@ -1,0 +1,22 @@
+{
+  "name": "coldwave",
+  "version": "1.0.0",
+  "description": "a page to display staffs about the cold wave ",
+  "main": "index.html",
+  "scripts": {
+    "test": "'node test.js'"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SLRXXX/coldwave.git"
+  },
+  "keywords": [
+    "coldwave"
+  ],
+  "author": "slrxxx",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/SLRXXX/coldwave/issues"
+  },
+  "homepage": "https://github.com/SLRXXX/coldwave#readme"
+}
