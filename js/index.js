@@ -2,7 +2,7 @@
 * @Author: slr
 * @Date:   2016-03-20 09:08:00
 * @Last Modified by:   slr
-* @Last Modified time: 2016-03-24 18:05:55
+* @Last Modified time: 2016-03-25 00:34:33
 */
 
 'use strict';
@@ -36,7 +36,6 @@ $('#main').fullpage({
             }, 'page-1');
         } else if (anchorLink === 'page-2') {
             triggerOnce(renderChartOne, 'page-2');
-            triggerOnce(autoPlay, 'autoPlay');
         } else if (anchorLink === 'page-4') {
             triggerOnce(renderChartTwo, 'page-4');
         }

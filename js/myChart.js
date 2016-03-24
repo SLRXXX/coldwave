@@ -2,7 +2,7 @@
 * @Author: slr
 * @Date:   2016-03-23 14:53:57
 * @Last Modified by:   slr
-* @Last Modified time: 2016-03-25 00:18:34
+* @Last Modified time: 2016-03-25 00:34:13
 */
 
 'use strict';
@@ -102,6 +102,7 @@ var renderChartOne = function () {
         };
         myChart.setOption(option, true);
         myChart.renderData(data);
+        autoPlay();
     };
 
     myChart.showLoading('default', {
