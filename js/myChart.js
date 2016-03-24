@@ -2,7 +2,7 @@
 * @Author: slr
 * @Date:   2016-03-23 14:53:57
 * @Last Modified by:   slr
-* @Last Modified time: 2016-03-24 23:30:39
+* @Last Modified time: 2016-03-25 00:14:28
 */
 
 'use strict';
@@ -27,8 +27,8 @@ var renderChartOne = function () {
                 min: -30,
                 max: 30,
                 calculable: true,
-                //color: ['#e89183', '#c0da70', '#318fd1'],
-                color: ['#d7eeff','#318fd1','#023960'],
+                color: ['#e89183', '#c0da70', '#318fd1'],
+                //color: ['#d7eeff','#318fd1','#023960'],
                 textStyle: {
                     color: '#fff'
                 }
@@ -55,12 +55,12 @@ var renderChartOne = function () {
                 roam: false,    // 不允许放缩
                 itemStyle: {
                     normal: {
-                        areaColor: '#c4d5e4',
+                        areaColor: /*'#c4d5e4'*/ '#fff',
                         borderColor: backColor,
                         borderWidth: 1
                     },
                     emphasis: {
-                        areaColor: '#c0daea'
+                        areaColor: /*'#c0daea'*/ '#fff'
                     }
                 }
             },
@@ -82,7 +82,8 @@ var renderChartOne = function () {
                     },
                     itemStyle: {
                         normal: {
-                            opacity: 1
+                            opacity: 1,
+                            borderWidth: 1
                         },
                         emphasis: {
                             // color: '#6aa9c8',
@@ -161,7 +162,7 @@ var renderChartOne = function () {
     };
 
 
-    myChart.on('click', function (param) {
+    myChart.on('mouseover', function (param) {
         renderCityChart(param.name);
     });
     window.myChart = myChart;
@@ -171,6 +172,7 @@ var renderChartOne = function () {
 
 var renderChartTwo = function () {;};
 var renderCityChart = function (city) {
+    $('.city-chart-area').show();
     $('.city-info .city-name').text(city);
 
     var cityChart = echarts.init(document.getElementById('city-chart'));
@@ -191,7 +193,11 @@ var renderCityChart = function (city) {
     }
     var option = {
         tooltip: {
-            trigger: 'axis'
+            trigger: 'axis',
+            formatter: '{b}日<br/>{a0}: {c0}<br/>{a1}: {c1}<br/>{a2}: {c2}',
+            textStyle: {
+                fontSize: 11
+            }
         },
         xAxis:  {
             type: 'category',
@@ -254,16 +260,46 @@ var renderCityChart = function (city) {
             {
                 name:'最高气温',
                 type:'line',
-                data: maxs
+                data: maxs,
+                lineStyle: {
+                    normal: {
+                        lineColor: '#e89183'
+                    }
+                },
+                itemStyle: {
+                    normal: {
+                        color: '#e89183'
+                    }
+                }
             },{
                 name: '平均气温',
                 type: 'line',
-                data: means
+                data: means,
+                lineStyle: {
+                    normal: {
+                        lineColor: '#c0da70'
+                    }
+                },
+                itemStyle: {
+                    normal: {
+                        color: '#c0da70'
+                    }
+                }
             },
             {
                 name:'最低气温',
                 type:'line',
-                data: mins
+                data: mins,
+                lineStyle: {
+                    normal: {
+                        lineColor: '#318fd1'
+                    }
+                },
+                itemStyle: {
+                    normal: {
+                        color: '#318fd1'
+                    }
+                }
             }
         ]
     };
