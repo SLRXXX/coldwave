@@ -2,7 +2,7 @@
 * @Author: slr
 * @Date:   2016-03-20 09:08:00
 * @Last Modified by:   slr
-* @Last Modified time: 2016-03-25 00:34:33
+* @Last Modified time: 2016-03-25 00:42:06
 */
 
 'use strict';
@@ -29,6 +29,7 @@ $('#main').fullpage({
     navigation: true,
     navigationPosition: 'right',
     navigationTooltips: ['简介', '全国气温', '事件', '全球气候', '说明'],
+    scrollOverflow: true,
     afterLoad: function(anchorLink, index){
         if (anchorLink === 'page-1') {
             triggerOnce(function () {
