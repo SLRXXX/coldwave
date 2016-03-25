@@ -2,7 +2,7 @@
 * @Author: slr
 * @Date:   2016-03-24 17:49:51
 * @Last Modified by:   slr
-* @Last Modified time: 2016-03-24 20:50:47
+* @Last Modified time: 2016-03-25 15:34:54
 */
 
 'use strict';
@@ -12,6 +12,8 @@ var cursorGo = function (pos) {
     $('.cursor-area .cursor').css({
         left: 20 * ((pos + 1) % 5) + 10 + '%'
     });
+    var myChart = window.CHARTS.mapChart;
+    var weatherData = window.DATA.weatherData;
     myChart.renderData(weatherData[pos].wdata);
 }
 $('.cursor-area .time').each(function (index, ele) {

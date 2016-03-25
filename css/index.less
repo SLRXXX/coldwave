@@ -44,6 +44,27 @@ ul {
 
 // detailed
 
+// fullpage
+#fp-nav {
+    ul {
+        li {
+            a {
+                &.active {
+                    span {
+                        background-color: @mc;
+                        color: @mc;
+                    }
+                }
+                span {
+                    background-color: darken(@mc, 30%);
+                }
+            }
+            .fp-tooltip {
+                color: @fc;
+            }
+        }
+    }
+}
 
 
 #top-nav {
@@ -98,6 +119,7 @@ ul {
 #section-2 {
     .container {
         position: relative;
+        height: 100%;
         min-height: 500px;
     }
     #map-area {
@@ -208,23 +230,125 @@ ul {
     }
 }
 
-#fp-nav {
-    ul {
-        li {
-            a {
-                &.active {
-                    span {
-                        background-color: @mc;
-                        color: @mc;
+#section-3 {
+    .container {
+        position: relative;
+        min-height: 500px;
+        height: 100%;
+    }
+    .legend-area {
+        position: absolute;
+        left: 2em;
+        top: 2em;
+        width: 31rem;
+        height: 22.5rem;
+        background-color: @mc;
+        z-index: 2;
+        .title {
+            background-color: @dc;
+            color: @fc;
+            height: 2.5rem;
+            line-height: 2.5rem;
+            padding-left: 1rem;
+            font-size: 1.3rem;
+        }
+        .content {
+            font-size: 1rem;
+            color: @bc;
+        }
+        .cw-table {
+            border-collapse: separate;
+            border-spacing: 0 1rem;
+            margin: 1em;
+            margin-top: 0;
+            thead {
+                th {
+                    font-weight: 400;
+                }
+
+            }
+            tr {
+                td {
+                    text-align: center;
+                    width: 8rem;
+                    height: 3rem;
+                    line-height: 1.5rem;
+                    border-top: 1px dashed @bc;
+                    border-bottom: 1px dashed @bc;
+
+                    &.td-img {
+                        width: 5rem;
+                        border-top: none;
+                        border-bottom: none;
+                        img {
+                            display: block;
+                            width: 4rem;
+                            height: 3rem;
+                        }
+                    }
+                    &.td-left {
+                        border-left: 1px dashed @bc;
+                    }
+                    &.td-right {
+                        border-right: 1px dashed @bc;
                     }
                 }
-                span {
-                    background-color: darken(@mc, 30%);
-                }
             }
-            .fp-tooltip {
-                color: @fc;
-            }
+        }
+    }
+    .effect-area {
+        .fill;
+        width: 70%;
+        min-width: 500px;
+        left: 5%;
+        #effect-chart {
+            .fill;
+        }
+    }
+    .city-detail-area {
+        display: none;
+        position: absolute;
+        top: 2em;
+        right: 0;
+        width: 25%;
+        height: 40%;
+        margin: 0;
+        margin-right: 3em;
+        z-index: 3;
+        &.active {
+            display: block;
+        }
+        .city-detail-container {
+            background-color: @mc;
+            color: @bc;
+            position: relative;
+            padding: 1rem;
+        }
+        .city-name {
+            font-size: 1.4rem;
+            margin-bottom: 1.5rem;
+        }
+        .content {
+            font-size: 1.1rem;
+            background-color: @dc;
+            color: @fc;
+            padding: 0.7rem 1rem;
+            border-radius: 3px;
+        }
+    }
+    .info-area {
+        position: absolute;
+        right: 0;
+        bottom: 0;
+        width: 25%;
+        .info {
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            color: @mc;
+            text-align: right;
+            padding-right: 3em;
+            padding-bottom: 2em;
         }
     }
 }
