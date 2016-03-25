@@ -2,7 +2,7 @@
 * @Author: slr
 * @Date:   2016-03-23 14:53:57
 * @Last Modified by:   slr
-* @Last Modified time: 2016-03-25 18:00:14
+* @Last Modified time: 2016-03-25 19:43:13
 */
 
 'use strict';
@@ -24,46 +24,8 @@ OPTIONS.loading = {
     zlevel: 0
 };
 
-var DATA = {};
 var CHARTS = {};
 
-DATA.effectData = {
-    '北京': {
-        head: '21日发布寒潮黄色预警信号',
-        content: '北京市政市容委统计，受本次持续低温影响，北京用气用电量双双破历史纪录，天然气用量达到1.06亿立方米，电力最大负荷超过1695万千瓦。',
-        color: '#ffff01'
-    },
-    '上海': {
-        head: '寒潮蓝色预警',
-        content: '1月24日，本市的低温极值，已经达到了零下7.2度的低温，创36年之最。突如其来的寒潮，导致上海多家小区水管被冻，引发大面积停水。\n上海供水热线1月24日全天的来电量创历史新高，反映水管冻结的来电超过10000通；物业服务热线共接到市民来电26000多个，反映水管冻结等问题的5300余起。',
-        color: '#3465ff'
-    },
-    '浙江': {
-        head: '寒潮蓝色预警',
-        content: '截至24日14时，浙江受灾人口56.2万人；因灾造成直接经济损失3.8亿元人民币；倒塌房屋28间、严重损坏房屋58间。',
-        color: '#3465ff'
-    },
-    '湖南': {
-        head: '',
-        content: '1月21至24日，连日的严寒冰冻加上暴雪，引发湖南全省大面积停电，通信光缆受损就达29.5皮长公里，造成移动通信基站停电近4000站次，基站累计退服达1622站次，影响移动通信用户25万户。\n截至1月27日，全省农作物受灾67万亩，其中成灾25万亩，绝收近2万亩',
-        color: '#3465ff'
-    },
-    '广西': {
-        head: '启动重大气象灾害(雨雪、冰冻、寒潮)Ⅲ级应急',
-        content: '1月23日以来，受强降温及降雪影响，桂林市资源，南宁市青秀、邕宁、江南、武鸣，贵港市覃塘、港南、桂平，崇左市宁明、凭祥、龙州、大新，百色市那坡、乐业、右江、田东、德保等地出现雪灾或低温冷冻灾害。截至26日17时30分统计，灾害共造成17.98万人受灾;农作物受灾面积13.55千公顷，一般损坏农房14户26间。\n寒潮带来的冰冻天气已导致位于北部湾沿海的广西钦州市10多万斤罗非鱼死亡。来自钦州市水产畜牧兽医局的统计显示，截至25日18时，寒潮导致全市水产畜牧业造成的直接经济损失估算为118.02万元，其中罗非鱼损失10.72万斤。',
-        color: '#3465ff'
-    },
-    '广东': {
-        head: '23日 寒潮橙色预警',
-        content: '1月22日以来的历史罕见寒潮对广东全省渔业造成了巨大影响。截止1月26日，全省渔业受灾面积11.7万亩，鱼苗损失8865万尾，虾苗损失50万尾，渔业总经济损失9.9亿元。\n2016年1月25日下午5时—26日下午4时，受灾人口41.39万人，新增农作物受灾面积45.03千公顷。截至26日下午4时，韶关、河源、梅州、惠州、汕尾、中山、江门、阳江、茂名、清远、揭阳、云浮12市31个县（市、区）、255个乡镇（街道）不同程度受灾，累计受灾人口47.36万人，累计农作物受灾面积50.52千公顷、绝收面积1.25千公顷，直接经济损失6.37亿元；',
-        color: '#fd9801'
-    },
-    '云南': {
-        head: '寒潮橙色预警',
-        content: '24日，受降雪、低温和道路结冰的影响，昭待高速、昆嵩高速、普宣高速、曲胜高速、昆石高速、西石高速、水麻高速、昭会高速、砚平高速、平锁高速因路面结冰严重，不具备正常通行条件全线封闭。\n由于强寒潮天气影响，导致大面积航班延误，从24日11时39分许，昆明机场大面积航班延误应急处置由III级调整为II级响应。昨日上午，昆明机场依然持续着小雪天气，主导能见度7000米，风速9米/秒，出港航班排队除冰，一些旅客的航班由于冰雪天气延误或取消。',
-        color: '#fd9801'
-    }
-};
 
 var initMap = function (callback) {
     if (window.DATA.chinaJson) {
@@ -78,11 +40,10 @@ var initMap = function (callback) {
 };
 
 
-var initMapChart = function () {
-    if ($('#map-chart').find('canvas').length > 0) {
-        return;
-    }
+var initMapChart = function (callback) {
+    if ($('#map-chart').find('canvas').length > 0) return;
     var myChart = echarts.init(document.getElementById('map-chart'));
+
     var initChart = function (data) {
         var option = {
             backgroundColor: COLORS.bc,
@@ -174,7 +135,7 @@ var initMapChart = function () {
         };
         myChart.setOption(option);
         myChart.renderData(data);
-        autoPlay();
+        callback && callback();
     };
 
     myChart.convertData = function (data) {
@@ -204,31 +165,30 @@ var initMapChart = function () {
 
     myChart.showLoading('default', OPTIONS.loading);
     initMap(function (chinaJson) {
-        $.get('data/weather.json').then(function (weatherJson) {
-            myChart.hideLoading();
-            window.DATA.weatherData = weatherJson;
-            var data = weatherJson[0].wdata;
-            var convertData = function (data) {
-                var res = [];
-                for (var i = 0; i < data.length; i++) {
-                    var geoCoord = geoCoordMap[data[i].name];
-                    if (geoCoord) {
-                        res.push({
-                            name: data[i].name,
-                            value: geoCoord.concat(data[i].mean)
-                        });
-                    }
+        myChart.hideLoading();
+        var weatherJson = window.DATA.weatherData;
+        window.DATA.weatherData = weatherJson;
+        var data = weatherJson[0].wdata;
+        var convertData = function (data) {
+            var res = [];
+            for (var i = 0; i < data.length; i++) {
+                var geoCoord = geoCoordMap[data[i].name];
+                if (geoCoord) {
+                    res.push({
+                        name: data[i].name,
+                        value: geoCoord.concat(data[i].mean)
+                    });
                 }
-                return res;
-            };
-            myChart.setOption({
-                series: [{
-                    type: 'map',
-                    map: 'china'
-                }]
-            });
-            initChart(data);
+            }
+            return res;
+        };
+        myChart.setOption({
+            series: [{
+                type: 'map',
+                map: 'china'
+            }]
         });
+        initChart(data);
     });
 
     window.CHARTS.mapChart = myChart;
@@ -379,7 +339,7 @@ var renderCityChart = function (city) {
     cityChart.setOption(option);
 };
 
-var initEffectChart = function () {
+var initEffectChart = function (callback) {
     if ($('#effect-chart').find('canvas').length > 0) {
         return;
     }
@@ -442,16 +402,14 @@ var initEffectChart = function () {
             var data = window.DATA.effectData;
             if (data[cityname]) {
                 data = data[cityname];
-                $('.city-detail-area').show();
+                $('.city-detail-area').slideDown();
                 $('.city-detail-area .city-name').text(cityname);
                 $('.city-detail-area .content .text-head').text(data.head);
                 $('.city-detail-area .content .text-content').html(data.content.replace('\n', '<br/>'));
 
             }
         };
-
         myChart.on('mouseover', function (param) {
-            console.log(param);
             if (param.data && param.data.name) {
                 showEffect(param.data.name);
             }
@@ -467,6 +425,7 @@ var initEffectChart = function () {
             }]
         });
         initChart();
+        callback && callback();
     });
 };
 
