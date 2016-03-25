@@ -2,17 +2,26 @@
 * @Author: slr
 * @Date:   2016-03-23 14:53:57
 * @Last Modified by:   slr
-* @Last Modified time: 2016-03-25 12:55:11
+* @Last Modified time: 2016-03-25 13:00:43
 */
 
 'use strict';
 
 // 定义颜色，同css
-var colors = {
+var COLORS = {
     bc : '#042d57',
     fc : '#fff',
     mc : '#add8ed',
     dc : '#1e5793'
+};
+
+var OPTIONS = {};
+OPTIONS.loading = {
+    text: '加载中...',
+    color: '#fff',
+    textColor: '#fff',
+    maskColor: COLORS.bc,
+    zlevel: 0
 };
 
 
@@ -23,7 +32,7 @@ var initMapChart = function () {
     var myChart = echarts.init(document.getElementById('map-chart'));
     var initChart = function (data) {
         var option = {
-            backgroundColor: colors.bc,
+            backgroundColor: COLORS.bc,
             textStyle: {
                 fontSize: 14
             },
@@ -66,7 +75,7 @@ var initMapChart = function () {
                 itemStyle: {
                     normal: {
                         areaColor: /*'#c4d5e4'*/ '#fff',
-                        borderColor: colors.bc,
+                        borderColor: COLORS.bc,
                         borderWidth: 1
                     },
                     emphasis: {
@@ -115,13 +124,7 @@ var initMapChart = function () {
         autoPlay();
     };
 
-    myChart.showLoading('default', {
-        text: '加载中...',
-        color: '#fff',
-        textColor: '#fff',
-        maskColor: colors.bc,
-        zlevel: 0
-    });
+    myChart.showLoading('default', OPTIONS.loading);
 
     $.get('data/china.json').then(function (chinaJson) {
         $.get('data/weather.json').then(function (weatherJson) {
@@ -340,7 +343,7 @@ var initIceChart = function () {
         return res;
     }
     var myChart = echarts.init($('#ice-chart')[0]);
-    myChart.showLoading();
+    myChart.showLoading('default', OPTIONS.loading);
     $.get('data/ice.json').then(function (iceJson) {
         myChart.hideLoading();
         var data = renderData(iceJson.data);
@@ -466,7 +469,7 @@ var initAirChart = function () {
         return res;
     };
     var myChart = echarts.init($('#air-chart')[0]);
-    myChart.showLoading();
+    myChart.showLoading('default', OPTIONS.loading);
     $.get('data/air.json').then(function (airJson) {
         myChart.hideLoading();
         var data = renderData(airJson.data);
