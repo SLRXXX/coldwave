@@ -19,9 +19,10 @@
 
 
 // colors
-@bc: #042d57;     // background
-@fc: #fff;       // fore
-@mc: #add8ed;   // middle-color
+@bc: #042d57;   // background
+@fc: #fff;      // fore
+@mc: #add8ed;   // middle-color,darker than fore
+@dc: #1e5793;   // darker than mc, lightener than b
 
 
 // common
@@ -35,30 +36,15 @@ body {
 * {
     font-family: "Helvetica Neue", Ubuntu, "Hiragino Sans GB", "WenQuanYi Micro Hei", sans-serif, STHei,"Microsoft YaHei","微软雅黑","华文黑体";
 }
+ul {
+    margin: 0;
+    padding: 0;
+}
 
 
 // detailed
 
-.text-area {
-    width: 24em;
-    margin: 0 auto;
-    color: @fc;
-    line-height: 2.4rem;
-    .title {
-        font-size: 3rem;
-    }
-    .group {
-        .label {
-            display: inline-block;
-            width: 5em;
-            vertical-align: top;
-        }
-        .content {
-            display: inline-block;
-            vertical-align: top;
-        }
-    }
-}
+
 
 #top-nav {
     position: absolute;
@@ -79,12 +65,32 @@ body {
     z-index: 1;
 }
 
+.text-area {
+    width: 24em;
+    margin: 0 auto;
+    color: @fc;
+    line-height: 2.4rem;
+    a {
+        color: @mc;
+        text-decoration: none;
+        &:hover {
+            text-decoration: underline;
+        }
+    }
+}
 
 #section-1 {
     .text-area {
+        width: 24em;
+        margin: 0 auto;
+        color: @fc;
+        line-height: 2.4rem;
+        height: 12rem;
+        .title {
+            font-size: 3rem;
+        }
         .content {
             text-indent: 2em;
-            height: 15rem;
         }
     }
 }
@@ -98,6 +104,9 @@ body {
         .fill;
         width: 70%;
         left: 5%;
+        #map-chart {
+            .fill;
+        }
     }
     .cursor-area {
         position: absolute;
@@ -221,9 +230,81 @@ body {
 }
 
 #section-4 {
+    .container {
+        position: absolute;
+        width: 60%;
+        left: 20%;
+        height: 60%;
+        top: 20%;
+    }
+    .text-area {
+        text-align: right;
+        width: auto;
+        color: @fc;
+        height: 20%;
+        line-height: 1;
+        .em {
+            font-style: normal;
+            font-weight: 400;
+            color: #ffc401;
+        }
+    }
     #chart-area {
         .fill;
         z-index: -1;
+    }
+    @theight: 35px;
+    .tab-area {
+        background-color: @mc;
+        height: 80%;
+        position: relative;
+        .index-list {
+            overflow: hidden;
+            font-size: 1.2rem;
+            .list-item {
+                display: inline-block;
+                width: 50%;
+                float: left;
+                list-style: none;
+                height: @theight;
+                line-height: @theight;
+                background-color: @dc;
+                text-align: center;
+                a {
+                    color: @mc;
+                    text-decoration: none;
+                }
+                &.active {
+                    background-color: @mc;
+                    a {
+                        color: @dc;
+                    }
+                }
+            }
+        }
+        .content-list {
+            border-top: 1px solid @dc;
+            position: absolute;
+            top: @theight;
+            bottom: 0;
+            width: 100%;
+            // .list-item {
+            //     .fill;
+            //     display: block;
+            //     z-index: 1;
+            //     &.active {
+            //         z-index: 2;
+            //     }
+            // }
+        }
+    }
+    #ice-chart, #air-chart {
+        position: absolute;
+        top: 8%;
+        left: 3%;
+        width: 94%;
+        height: 84%;
+        border-radius: 3px;
     }
 }
 
@@ -232,11 +313,42 @@ body {
         display: inline-block;
         width: auto;
         margin: 0 auto;
+        color: @fc;
+        .group {
+            .label {
+                display: inline-block;
+                width: 5em;
+                vertical-align: top;
+            }
+            .content {
+                display: inline-block;
+                vertical-align: top;
+            }
+        }
     }
     .fp-tableCell {
         text-align: center;
         .text-area {
             text-align: left;
+        }
+    }
+}
+
+
+.tab-area {
+    .tab-index {
+        a {
+            display: block;
+            width: 100%;
+            height: 100%;
+        }
+    }
+    .tab-content {
+        .list-item {
+            display: none;
+            &.active {
+                display: block;
+            }
         }
     }
 }

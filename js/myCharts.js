@@ -2,18 +2,28 @@
 * @Author: slr
 * @Date:   2016-03-23 14:53:57
 * @Last Modified by:   slr
-* @Last Modified time: 2016-03-25 00:34:13
+* @Last Modified time: 2016-03-25 12:55:11
 */
 
 'use strict';
 
-var backColor = $('body').css('background-color');
+// 定义颜色，同css
+var colors = {
+    bc : '#042d57',
+    fc : '#fff',
+    mc : '#add8ed',
+    dc : '#1e5793'
+};
 
-var renderChartOne = function () {
-    var myChart = echarts.init(document.getElementById('map-area'));
+
+var initMapChart = function () {
+    if ($('#map-chart').find('canvas').length > 0) {
+        return;
+    }
+    var myChart = echarts.init(document.getElementById('map-chart'));
     var initChart = function (data) {
         var option = {
-            backgroundColor: backColor,
+            backgroundColor: colors.bc,
             textStyle: {
                 fontSize: 14
             },
@@ -56,7 +66,7 @@ var renderChartOne = function () {
                 itemStyle: {
                     normal: {
                         areaColor: /*'#c4d5e4'*/ '#fff',
-                        borderColor: backColor,
+                        borderColor: colors.bc,
                         borderWidth: 1
                     },
                     emphasis: {
@@ -100,7 +110,7 @@ var renderChartOne = function () {
                 }
             ]
         };
-        myChart.setOption(option, true);
+        myChart.setOption(option);
         myChart.renderData(data);
         autoPlay();
     };
@@ -109,7 +119,7 @@ var renderChartOne = function () {
         text: '加载中...',
         color: '#fff',
         textColor: '#fff',
-        maskColor: backColor,
+        maskColor: colors.bc,
         zlevel: 0
     });
 
@@ -159,7 +169,7 @@ var renderChartOne = function () {
         data = myChart.convertData(data);
         var option = myChart.getOption();
         option.series[0].data = data;
-        myChart.setOption(option, true);
+        myChart.setOption(option);
     };
 
 
@@ -170,8 +180,6 @@ var renderChartOne = function () {
     return myChart;
 };
 
-
-var renderChartTwo = function () {;};
 var renderCityChart = function (city) {
     $('.city-chart-area').show();
     $('.city-info .city-name').text(city);
@@ -310,5 +318,259 @@ var renderCityChart = function (city) {
         ]
     };
 
-    cityChart.setOption(option, true);
+    cityChart.setOption(option);
+};
+
+var initIceChart = function () {
+    if ($('#ice-chart').find('canvas').length > 0) {
+        return;
+    }
+    var renderData = function (data) {
+        var res = {
+            years: [],
+            values: [],
+            anoms: []
+        };
+        for (var year in data) {
+            var yd = data[year];
+            res.years.push(year);
+            res.values.push(yd.value);
+            res.anoms.push(yd.anom);
+        }
+        return res;
+    }
+    var myChart = echarts.init($('#ice-chart')[0]);
+    myChart.showLoading();
+    $.get('data/ice.json').then(function (iceJson) {
+        myChart.hideLoading();
+        var data = renderData(iceJson.data);
+        var option = {
+            type: 'line',
+            tooltip: {
+                trigger: 'axis',
+                textStyle: {
+                    fontSize: 11
+                },
+                formatter: '{b}年<br/>{a}: {c}',
+                axisPointer: {
+                    lineStyle: {
+                        color: '#89b4d5'
+                    }
+                }
+            },
+            xAxis:  {
+                type: 'category',
+                data: data.years,
+                name: '年份',
+                nameLocatoin: 'end',
+                nameGap: 8,
+                axisLabel: {
+                    textStyle: {
+                        color: '#fff',
+                        fontSize: 12
+                    }
+                },
+                splitLine: {
+                    show: false
+                },
+                axisTick: {
+                    show: false
+                },
+                axisLine: {
+                    lineStyle: {
+                        color: '#89b4d5'
+                    }
+                }
+            },
+            yAxis: {
+                type: 'value',
+                name: '　　　　　冰层面积(百万平方米)',
+                nameLocatoin: 'end',
+                nameGap: 10,
+                scale: true,
+                min: 'dataMin',
+                axisLabel: {
+                    formatter: '{value}',
+                    textStyle: {
+                        color: '#fff',
+                        fontSize: 11
+                    }
+                },
+                splitLine: {
+                    show: false
+                },
+                axisLine: {
+                    lineStyle: {
+                        color: '#89b4d5'
+                    }
+                },
+                axisTick: {
+                    lineStyle: {
+                        color: '#89b4d5'
+                    },
+                    show: false
+                }
+            },
+            grid: {
+                top: '15%',
+                left: '2%',
+                bottom: '8%',
+                right: '8%',
+                containLabel: true
+            },
+            backgroundColor: '#2462a2',
+            series: [
+                {
+                    name:'冰层面积',
+                    type:'line',
+                    data: data.values,
+                    lineStyle: {
+                        normal: {
+                            lineColor: '#fff'
+                        }
+                    },
+                    itemStyle: {
+                        normal: {
+                            color: '#fff',
+                            opacity: 0
+                        },
+                        emphasis: {
+                            opacity: 1
+                        }
+                    },
+                    areaStyle: {
+                        normal: {
+                            color: '#fff'
+                       }
+                   },
+                }
+            ]
+        };
+        myChart.setOption(option);
+    });
+};
+
+var initAirChart = function () {
+    if ($('#air-chart').find('canvas').length > 0) {
+        return;
+    }
+    var renderData = function (data) {
+        var res = {
+            years: [],
+            values: []
+        };
+        for (var year in data) {
+            res.years.push(year);
+            res.values.push(data[year]);
+        }
+        return res;
+    };
+    var myChart = echarts.init($('#air-chart')[0]);
+    myChart.showLoading();
+    $.get('data/air.json').then(function (airJson) {
+        myChart.hideLoading();
+        var data = renderData(airJson.data);
+        var option = {
+            type: 'line',
+            tooltip: {
+                trigger: 'axis',
+                textStyle: {
+                    fontSize: 11
+                },
+                formatter: '{b}年1月<br/>{a}: {c}°C',
+                axisPointer: {
+                    lineStyle: {
+                        color: '#89b4d5'
+                    }
+                }
+            },
+            xAxis:  {
+                type: 'category',
+                data: data.years,
+                name: '年份',
+                nameLocatoin: 'end',
+                nameGap: 8,
+                axisLabel: {
+                    textStyle: {
+                        color: '#fff',
+                        fontSize: 12
+                    }
+                },
+                splitLine: {
+                    show: false
+                },
+                axisTick: {
+                    show: false
+                },
+                axisLine: {
+                    lineStyle: {
+                        color: '#89b4d5'
+                    }
+                }
+            },
+            yAxis: {
+                type: 'value',
+                name: '气温(°C)',
+                nameLocatoin: 'end',
+                nameGap: 10,
+                axisLabel: {
+                    formatter: '{value}',
+                    textStyle: {
+                        color: '#fff',
+                        fontSize: 11
+                    }
+                },
+                splitLine: {
+                    show: false
+                },
+                axisLine: {
+                    lineStyle: {
+                        color: '#89b4d5'
+                    }
+                },
+                axisTick: {
+                    lineStyle: {
+                        color: '#89b4d5'
+                    },
+                    show: false
+                }
+            },
+            grid: {
+                top: '15%',
+                left: '2%',
+                bottom: '8%',
+                right: '8%',
+                containLabel: true
+            },
+            backgroundColor: '#2462a2',
+            series: [
+                {
+                    name:'气温',
+                    type:'line',
+                    data: data.values,
+                    lineStyle: {
+                        normal: {
+                            lineColor: '#fff'
+                        }
+                    },
+                    itemStyle: {
+                        normal: {
+                            color: '#fff',
+                            opacity: 0
+                        },
+                        emphasis: {
+                            opacity: 1
+                        }
+                    },
+                   //  areaStyle: {
+                   //      normal: {
+                   //          color: '#fff'
+                   //     }
+                   // },
+                }
+            ]
+        };
+        myChart.setOption(option);
+    });
+
 };
