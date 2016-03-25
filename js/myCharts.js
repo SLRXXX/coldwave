@@ -2,7 +2,7 @@
 * @Author: slr
 * @Date:   2016-03-23 14:53:57
 * @Last Modified by:   slr
-* @Last Modified time: 2016-03-25 19:43:13
+* @Last Modified time: 2016-03-25 20:24:15
 */
 
 'use strict';
@@ -53,7 +53,7 @@ var initMapChart = function (callback) {
             tooltip: {
                 trigger: 'item',
                 formatter: function (params) {
-                    return params.name + ' : ' + params.value[2];
+                    return params.name + ' <br/> ' + '平均气温:' +  params.value[2];
                 }
             },
             dataRange: {
