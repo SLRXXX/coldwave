@@ -2,7 +2,7 @@
 * @Author: slr
 * @Date:   2016-03-20 09:08:00
 * @Last Modified by:   slr
-* @Last Modified time: 2016-03-25 19:58:05
+* @Last Modified time: 2016-03-25 22:50:49
 */
 
 'use strict';
@@ -14,10 +14,22 @@ var initPageOne = function () {
     if ($area.text().replace(/\s*/g, '').length > 0) {
         return;
     }
-    var showText = function ($target, message, index, interval) {
+
+    var showArrow = function () {
+        var $arrow = $('#arrow-down');
+        setInterval(function() {
+            $arrow.css({
+                opacity: 1 - $arrow.css('opacity')
+            });
+        }, 500);
+    };
+
+    var showText = function ($target, message, index, interval, callback) {
         if (index < message.length) {
             $target.append(message[index++]);
-            setTimeout(function () { showText($target, message, index, interval); }, interval);
+            setTimeout(function () { showText($target, message, index, interval, callback); }, interval);
+        } else {
+            callback && callback();
         }
     }
 
@@ -26,7 +38,7 @@ var initPageOne = function () {
         $area.html('<strong>寒潮</strong>');
     },100);
     setTimeout(function () {
-        showText($area, '是冬季的一种灾害性天气。作为局地短期的气象灾害现象，寒潮的破坏性极强。\n2016年2月中国气象局发布了1月全国天气气候特征报告，内容显示强寒潮于1月影响了全国大部分地区，其中21—25日是中国寒潮现象的高峰时间段。', 0, 100);
+        showText($area, '是冬季的一种灾害性天气。作为局地短期的气象灾害现象，寒潮的破坏性极强。\n2016年2月中国气象局发布了1月全国天气气候特征报告，内容显示强寒潮于1月影响了全国大部分地区，其中21—25日是中国寒潮现象的高峰时间段。', 0, 100, showArrow);
     }, 200);
 
 };

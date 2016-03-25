@@ -1,5 +1,6 @@
 @import (less) 'normalize.css';
 @import (less) 'jquery.fullPage.css';
+@import (less) 'font.css';
 
 // pre classes
 .fill {
@@ -15,6 +16,13 @@
        -moz-filter: blur(@px);
         -ms-filter: blur(@px);
             filter: blur(@px);
+}
+
+.transition(@arg1,@arg2, @arg3) {
+    transition: @arg1 @arg2 @arg3;
+    -moz-transition: @arg1 @arg2 @arg3; /* Firefox 4 */
+    -webkit-transition: @arg1 @arg2 @arg3; /* Safari 和 Chrome */
+    -o-transition: @arg1 @arg2 @arg3; /* Opera */
 }
 
 
@@ -121,6 +129,19 @@ ul {
         font-size: 2.5rem;
         margin-right: 3px;
     }
+    .arrow-area {
+        position: absolute;
+        bottom: 10%;
+        width: 100%;
+        text-align: center;
+        color: @fc;
+        a {
+            color: @fc;
+            text-decoration: none;
+            opacity: 0;
+            .transition(opacity, 0.5s, linear);
+        }
+    }
 }
 
 #section-2 {
@@ -169,7 +190,7 @@ ul {
             width: 6px;
             height: 15px;
             background-color: @fc;
-            transition: left 2s linear;
+            .transition(left, 2s, linear);
         }
         .info {
             position: absolute;
