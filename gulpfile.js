@@ -2,7 +2,7 @@
 * @Author: slr
 * @Date:   2016-03-20 09:01:11
 * @Last Modified by:   slr
-* @Last Modified time: 2016-03-26 09:56:13
+* @Last Modified time: 2016-03-26 12:18:24
 */
 
 'use strict';
@@ -20,7 +20,7 @@ var jsList = [
     'js/echarts.js',
     'js/data.js',
     'js/geoCoordMap.js',
-    'js/myChart.js',
+    'js/myCharts.js',
     'js/cursor.js',
     'js/index.js'
 ];

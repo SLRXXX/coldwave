@@ -2,7 +2,7 @@
 * @Author: slr
 * @Date:   2016-03-20 09:08:00
 * @Last Modified by:   slr
-* @Last Modified time: 2016-03-26 10:21:12
+* @Last Modified time: 2016-03-26 12:19:23
 */
 
 'use strict';
@@ -107,10 +107,7 @@ var init = function () {
         });
         $indexes.eq(0).trigger('click');
     });
-
-
     $('#main').show();
-
 }
 
 init();

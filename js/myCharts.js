@@ -2,7 +2,7 @@
 * @Author: slr
 * @Date:   2016-03-23 14:53:57
 * @Last Modified by:   slr
-* @Last Modified time: 2016-03-26 10:50:51
+* @Last Modified time: 2016-03-26 12:22:29
 */
 
 'use strict';
@@ -683,5 +683,4 @@ var initAirChart = function () {
         };
         myChart.setOption(option);
     });
-
 };
