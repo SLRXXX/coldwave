@@ -435,11 +435,12 @@ ul {
 
 #section-4 {
     .container {
-        position: absolute;
+        position: relative;
         width: 60%;
-        left: 20%;
+        min-width: 40rem;
         height: 50%;
-        top: 20%;
+        min-height: 25rem;
+        margin: 0 auto;
     }
     .text-area {
         text-align: right;
@@ -453,10 +454,7 @@ ul {
             color: #ffc401;
         }
     }
-    #chart-area {
-        .fill;
-        z-index: -1;
-    }
+
     @theight: 35px;
     .tab-area {
         background-color: @mc;
