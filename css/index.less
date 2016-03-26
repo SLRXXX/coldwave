@@ -25,6 +25,14 @@
     -o-transition: @arg1 @arg2 @arg3; /* Opera */
 }
 
+.rotate(@deg) {
+    transform:rotate(@deg);
+    -ms-transform:rotate(@deg);     /* IE 9 */
+    -moz-transform:rotate(@deg);    /* Firefox */
+    -webkit-transform:rotate(@deg); /* Safari 和 Chrome */
+    -o-transform:rotate(@deg);  /* Opera */
+}
+
 
 // colors
 @bc: #042d57;   // background
@@ -215,6 +223,8 @@ ul {
         right: 0;
         bottom: 0;
         width: 25%;
+        min-width: 10em;
+        text-align: right;
         .info {
             position: absolute;
             bottom: 0;
@@ -269,7 +279,6 @@ ul {
         left: 2em;
         top: 2em;
         width: 31rem;
-        height: 22.5rem;
         background-color: @mc;
         z-index: 2;
         .title {
@@ -280,7 +289,20 @@ ul {
             padding-left: 1rem;
             font-size: 1.3rem;
         }
+        .title {
+            .right-button {
+                float: right;
+                margin-right: 1em;
+                font-size: 1.2rem;
+                cursor: pointer;
+                .transition(transform, 0.5s, linear);
+                &.rotate {
+                    .rotate(180deg);
+                }
+            }
+        }
         .content {
+            height: 20rem;
             font-size: 1rem;
             color: @bc;
         }
@@ -339,6 +361,7 @@ ul {
         top: 2em;
         right: 0;
         width: 25%;
+        min-width: 20rem;
         height: 40%;
         margin: 0;
         margin-right: 3em;
@@ -350,18 +373,30 @@ ul {
             background-color: @mc;
             color: @bc;
             position: relative;
-            padding: 1rem;
+            padding: 0.8rem;
+            .right-top {
+                position: absolute;
+                top: 1em;
+                right: 1em;
+                .icon-close {
+                    cursor: pointer
+                }
+            }
         }
-        .city-name {
+        .city-head {
             font-size: 1.5rem;
             margin-bottom: 1.5rem;
+            .icon-close {
+                float: right;
+                cursor: pointer;
+            }
         }
         .content {
             font-size: 1.3rem;
             background-color: @dc;
             color: @fc;
-            padding: 0.7rem 1rem;
-            border-radius: 3px;
+            padding: 0.5rem 1rem;
+            border-radius: 2px;
         }
     }
     .info-area {
@@ -369,6 +404,8 @@ ul {
         right: 0;
         bottom: 0;
         width: 25%;
+        min-width: 14em;
+        text-align: right;
         .info {
             position: absolute;
             bottom: 0;

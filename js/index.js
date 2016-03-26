@@ -2,7 +2,7 @@
 * @Author: slr
 * @Date:   2016-03-20 09:08:00
 * @Last Modified by:   slr
-* @Last Modified time: 2016-03-25 22:50:49
+* @Last Modified time: 2016-03-26 09:16:56
 */
 
 'use strict';
@@ -50,7 +50,14 @@ var initPageTwo = function () {
 };
 var initPageThree = function () {
     initEffectChart(function () {
-        $('.legend-area').slideDown();
+        $('#section-3 .legend-area').slideDown();
+        $('#section-3 .right-button').on('click', function () {
+            $(this).toggleClass('rotate');
+            $('#section-3 .legend-area .content').slideToggle();
+        });
+        $('#section-3 .city-detail-area .icon-close').on('click', function () {
+            $('#section-3 .city-detail-area').slideUp();
+        });
     });
 };
 var initPageFour = function () {
