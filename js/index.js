@@ -2,7 +2,7 @@
 * @Author: slr
 * @Date:   2016-03-20 09:08:00
 * @Last Modified by:   slr
-* @Last Modified time: 2016-03-26 09:16:56
+* @Last Modified time: 2016-03-26 10:21:12
 */
 
 'use strict';
@@ -22,6 +22,9 @@ var initPageOne = function () {
                 opacity: 1 - $arrow.css('opacity')
             });
         }, 500);
+        $arrow.on('click', function () {
+            $.fn.fullpage.moveSectionDown();
+        });
     };
 
     var showText = function ($target, message, index, interval, callback) {
@@ -45,6 +48,7 @@ var initPageOne = function () {
 var initPageTwo = function () {
     initMapChart(function () {
         $('#section-1').show();
+        $('.cursor-area').fadeIn();
         autoPlay();
     });
 };
