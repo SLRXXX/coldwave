@@ -1,6 +1,556 @@
 @import (less) 'normalize.css';
+@import (less) 'jquery.fullPage.css';
+@import (less) 'font.css';
+
+// pre classes
+.fill {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.blur(@px) {
+    -webkit-filter: blur(@px);
+       -moz-filter: blur(@px);
+        -ms-filter: blur(@px);
+            filter: blur(@px);
+}
+
+.transition(@arg1,@arg2, @arg3) {
+    transition: @arg1 @arg2 @arg3;
+    -moz-transition: @arg1 @arg2 @arg3; /* Firefox 4 */
+    -webkit-transition: @arg1 @arg2 @arg3; /* Safari 和 Chrome */
+    -o-transition: @arg1 @arg2 @arg3; /* Opera */
+}
+
+.rotate(@deg) {
+    transform:rotate(@deg);
+    -ms-transform:rotate(@deg);     /* IE 9 */
+    -moz-transform:rotate(@deg);    /* Firefox */
+    -webkit-transform:rotate(@deg); /* Safari 和 Chrome */
+    -o-transform:rotate(@deg);  /* Opera */
+}
+
+
+// colors
+@bc: #042d57;   // background
+@fc: #fff;      // fore
+@mc: #add8ed;   // middle-color,darker than fore
+@dc: #1e5793;   // darker than mc, lightener than b
+
+
+// common
+html {
+    font-size: 10px;
+}
+body {
+    font-size: 1.5rem;
+    background-color: @bc;
+}
+* {
+    font-family: "Helvetica Neue", Ubuntu, "Hiragino Sans GB", sans-serif, STHei,"Microsoft YaHei","微软雅黑",SimHei, "华文黑体";
+}
+ul {
+    margin: 0;
+    padding: 0;
+}
+.hidden {
+    display: none;
+}
+
+// detailed
+
+// fullpage
+#fp-nav {
+    ul {
+        li {
+            a {
+                &.active {
+                    span {
+                        background-color: @mc;
+                        color: @mc;
+                    }
+                }
+                span {
+                    background-color: darken(@mc, 30%);
+                }
+            }
+            .fp-tooltip {
+                color: @fc;
+            }
+        }
+    }
+}
+
+
+#top-nav {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 2;
+    display: none;
+    li {
+        display: inline-block;
+        list-style: none;
+        margin-right: 5px;
+    }
+}
 #main {
     position: absolute;
     width: 100%;
     height: 100%;
+    z-index: 1;
+}
+
+.text-area {
+    width: 24em;
+    margin: 0 auto;
+    color: @fc;
+    line-height: 2.4rem;
+    a {
+        color: @mc;
+        text-decoration: none;
+        // &:hover {
+        //     text-decoration: underline;
+        // }
+    }
+}
+
+#section-1 {
+    .text-area {
+        width: 24em;
+        margin: 0 auto;
+        color: @fc;
+        line-height: 2.8rem;
+        font-size: 1.6rem;
+        height: 15rem;
+        .title {
+            font-size: 3rem;
+        }
+        .content {
+            text-indent: 2em;
+        }
+    }
+    strong {
+        font-size: 2.5rem;
+        margin-right: 3px;
+    }
+    .arrow-area {
+        position: absolute;
+        bottom: 10%;
+        width: 100%;
+        text-align: center;
+        color: @fc;
+        a {
+            color: @fc;
+            text-decoration: none;
+            opacity: 0;
+            .transition(opacity, 0.5s, linear);
+        }
+    }
+}
+
+#section-2 {
+    .container {
+        position: relative;
+        height: 100%;
+        min-height: 45rem;
+    }
+    #map-area {
+        .fill;
+        width: 75%;
+        min-width: 60rem;
+        left: 5%;
+        #map-chart {
+            .fill;
+        }
+    }
+    .cursor-area {
+        position: absolute;
+        width: 25%;
+        min-width: 20rem;
+        height: 50%;
+        top: 0;
+        right: 0;
+        .progressor {
+            position: absolute;
+            right: 3em;
+            top: 2em;
+            height: 100%;
+            top: 2em;
+            left: 2em;
+        }
+        .ruler {
+            position: absolute;
+            display: block;
+            width: 100%;
+            height: 5px;
+            right: 0;
+            top: 5px;
+            background-color: @mc;
+        }
+        .cursor {
+            display: block;
+            position: absolute;
+            top: 0;
+            left: 10%;
+            margin-left: -3px;
+            width: 6px;
+            height: 15px;
+            background-color: @fc;
+            .transition(left, 0.5s, linear);
+        }
+        .info {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            color: @fc;
+            font-size: 1.2rem;
+            overflow: hidden;
+            .time {
+                display: inline-block;
+                float: left;
+                padding-top: 20px;
+                width: 20%;
+                text-align: center;
+                cursor: pointer;
+            }
+        }
+    }
+    .info-area {
+        position: absolute;
+        right: 0;
+        bottom: 0;
+        width: 25%;
+        min-width: 10em;
+        font-size: 1.6rem;
+        text-align: right;
+        .info {
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            color: @mc;
+            text-align: right;
+            padding-right: 3em;
+            padding-bottom: 2em;
+        }
+    }
+    .city-chart-area {
+        display: none;
+        position: absolute;
+        top: 30%;
+        right: 0;
+        width: 25%;
+        height: 40%;
+        margin: 0;
+        margin-right: 3em;
+        &.active {
+            display: block;
+        }
+        .city-chart-container {
+            .fill;
+            background-color: #89b4d5;
+            color: @bc;
+        }
+        .city-info {
+            padding: 5%;
+        }
+        .city-chart {
+            position: absolute;
+            height: 60%;
+            top: auto;
+            bottom: 5%;
+            width: 90%;
+            left: 5%;
+            border-radius: 3px;
+            // overflow: hidden;
+        }
+    }
+}
+
+#section-3 {
+    .container {
+        position: relative;
+        min-height: 500px;
+        height: 100%;
+    }
+    .legend-area {
+        position: absolute;
+        left: 2em;
+        top: 2em;
+        width: 31rem;
+        background-color: @mc;
+        z-index: 2;
+        .title {
+            background-color: @dc;
+            color: @fc;
+            height: 2.5rem;
+            line-height: 2.5rem;
+            padding-left: 1rem;
+            font-size: 1.3rem;
+        }
+        .title {
+            .right-button {
+                float: right;
+                margin-right: 1em;
+                font-size: 1.2rem;
+                cursor: pointer;
+                .transition(transform, 0.5s, linear);
+                &.rotate {
+                    .rotate(180deg);
+                }
+            }
+        }
+        .content {
+            height: 20.2rem;
+            font-size: 1rem;
+            color: @bc;
+        }
+        .cw-table {
+            border-collapse: separate;
+            border-spacing: 0 1rem;
+            margin: 1em;
+            margin-top: 0;
+            thead {
+                th {
+                    font-weight: 400;
+                }
+
+            }
+            tr {
+                td {
+                    text-align: center;
+                    width: 8rem;
+                    height: 3rem;
+                    line-height: 1.5rem;
+                    border-top: 1px dashed @bc;
+                    border-bottom: 1px dashed @bc;
+
+                    &.td-img {
+                        width: 5rem;
+                        border-top: none;
+                        border-bottom: none;
+                        img {
+                            display: block;
+                            width: 4rem;
+                            height: 3.2rem;
+                            margin-top: -0.1rem;
+                            margin-bottom: -0.1rem;
+                        }
+                    }
+                    &.td-left {
+                        border-left: 1px dashed @bc;
+                    }
+                    &.td-right {
+                        border-right: 1px dashed @bc;
+                    }
+                }
+            }
+        }
+    }
+    .effect-area {
+        .fill;
+        width: 75%;
+        min-width: 500px;
+        left: 5%;
+        #effect-chart {
+            .fill;
+        }
+    }
+    .city-detail-area {
+        display: none;
+        position: absolute;
+        top: 2em;
+        right: 0;
+        width: 25%;
+        min-width: 20rem;
+        height: 40%;
+        margin: 0;
+        margin-right: 3em;
+        z-index: 3;
+        &.active {
+            display: block;
+        }
+        .city-detail-container {
+            background-color: @mc;
+            color: @bc;
+            position: relative;
+            padding: 0.8rem;
+            .right-top {
+                position: absolute;
+                top: 1em;
+                right: 1em;
+                .icon-close {
+                    cursor: pointer
+                }
+            }
+        }
+        .city-head {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+            .icon-close {
+                float: right;
+                cursor: pointer;
+            }
+        }
+        .text-head {
+            margin: 0.5rem 0;
+            font-weight: 700;
+        }
+        .content {
+            font-size: 1.3rem;
+            background-color: @dc;
+            line-height: 2rem;
+            color: @fc;
+            padding: 0.5rem 1rem;
+            border-radius: 2px;
+            p {
+                text-indent: 2em;
+                margin: 0;
+            }
+        }
+    }
+    .info-area {
+        position: absolute;
+        right: 0;
+        bottom: 0;
+        width: 25%;
+        min-width: 14em;
+        font-size: 1.6rem;
+        text-align: right;
+        .info {
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            color: @mc;
+            text-align: right;
+            padding-right: 3em;
+            padding-bottom: 2em;
+        }
+    }
+}
+
+#section-4 {
+    .container {
+        position: relative;
+        width: 60%;
+        min-width: 40rem;
+        height: 50%;
+        min-height: 25rem;
+        margin: 0 auto;
+    }
+    .text-area {
+        text-align: right;
+        width: auto;
+        color: @fc;
+        height: 15%;
+        line-height: 1;
+        .em {
+            font-style: normal;
+            font-weight: 400;
+            color: #ffc401;
+        }
+    }
+
+    @theight: 35px;
+    .tab-area {
+        background-color: @mc;
+        height: 85%;
+        position: relative;
+        .index-list {
+            overflow: hidden;
+            font-size: 1.2rem;
+            .list-item {
+                display: inline-block;
+                width: 50%;
+                float: left;
+                list-style: none;
+                height: @theight;
+                line-height: @theight;
+                background-color: @dc;
+                text-align: center;
+                a {
+                    color: @mc;
+                    text-decoration: none;
+                }
+                &.active {
+                    background-color: @mc;
+                    a {
+                        color: @dc;
+                    }
+                }
+            }
+        }
+        .content-list {
+            border-top: 1px solid @dc;
+            position: absolute;
+            top: @theight;
+            bottom: 0;
+            width: 100%;
+            // .list-item {
+            //     .fill;
+            //     display: block;
+            //     z-index: 1;
+            //     &.active {
+            //         z-index: 2;
+            //     }
+            // }
+        }
+    }
+    #ice-chart, #air-chart {
+        position: absolute;
+        top: 8%;
+        left: 3%;
+        width: 94%;
+        height: 84%;
+        border-radius: 3px;
+    }
+}
+
+#section-5 {
+    .text-area {
+        display: inline-block;
+        width: auto;
+        margin: 0 auto;
+        color: @fc;
+        .group {
+            .label {
+                display: inline-block;
+                width: 5em;
+                vertical-align: top;
+            }
+            .content {
+                display: inline-block;
+                vertical-align: top;
+            }
+        }
+    }
+    .fp-tableCell {
+        text-align: center;
+        .text-area {
+            text-align: left;
+        }
+    }
+}
+
+
+.tab-area {
+    .tab-index {
+        a {
+            display: block;
+            width: 100%;
+            height: 100%;
+        }
+    }
+    .tab-content {
+        .list-item {
+            display: none;
+            &.active {
+                display: block;
+            }
+        }
+    }
 }

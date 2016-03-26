@@ -2,15 +2,200 @@
 <html lang="en">
     <head>
         <meta charset="utf-8" />
-        <meta name="author" content="slr" />
-        <title>temperature</title>
+        <meta name="author" content="slr, http://www.sunliren.me" />
+        <title>寒潮</title>
         <link rel="stylesheet" href="css/index.css" />
+        <link rel="shortcut icon" href="favicon.ico" />
+        <style>
+            body {
+                background-color: #042d57;
+            }
+            #main {
+                display: none;
+            }
+        </style>
     </head>
     <body>
-        <div id="main" class="container"></div>
-        <script src="js/jquery-1.12.2.min.js"></script>
-        <script src="js/echarts.js"></script>
-        <script src="js/geoCoordMap.js"></script>
-        <script src="js/index.js"></script>
+        <ul id="top-nav">
+            <li data-menuanchor="page-1" class="active">
+                <a href="#page-1">section-1</a>
+            </li>
+            <li data-menuanchor="page-2">
+                <a href="#page-2">section-2</a>
+            </li>
+            <li data-menuanchor="page-3">
+                <a href="#page-3">section-3</a>
+            </li>
+            <li data-menuanchor="page-4">
+                <a href="#page-4">section-4</a>
+            </li>
+            <li data-menuanchor="page-5">
+                <a href="#page-5">section-5</a>
+            </li>
+        </ul>
+        <div id="main" class="container">
+            <div class="section" id="section-1" data-anchor="page-1">
+                <div class="text-area">
+                    <div class="content"></div>
+                </div>
+                <div class="arrow-area">
+                    <a href="javascript:void(0);" id="arrow-down"><i class="icon-arrowdown"></i></a>
+                </div>
+            </div>
+            <div class="section" id="section-2" data-anchor="page-2">
+                <div class="container">
+                    <div id="map-area">
+                        <div id="map-chart"></div>
+                    </div>
+                    <div class="cursor-area hidden">
+                        <div class="progressor">
+                            <div class="ruler"></div>
+                            <span class="cursor"></span>
+                            <div class="info">
+                                <span class="time">21日</span>
+                                <span class="time">22日</span>
+                                <span class="time">23日</span>
+                                <span class="time">24日</span>
+                                <span class="time">25日</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="city-chart-area">
+                        <div class="city-chart-container">
+                            <div class="top-d"></div>
+                            <div class="city-info">
+                                <div class="city-name"></div>
+                            </div>
+                            <div class="city-chart" id="city-chart"></div>
+                        </div>
+                    </div>
+                    <div class="info-area">
+                        <div class="info">
+                            2016年1月21日-25日<br/>
+                            各地天气情况
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="section" id="section-3" data-anchor="page-3">
+                <div class="container">
+                    <div class="legend-area hidden">
+                        <div class="title">寒潮预警信号<span class="right-button">
+                            <i class="icon-chevron-up"></i>
+                        </span></div>
+                        <div class="content">
+                            <table class="cw-table">
+                                <thead>
+                                    <tr>
+                                        <th></th>
+                                        <th>最低气温下降</th>
+                                        <th>最低气温小于等于</th>
+                                        <th>陆地平均风力</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td class="td-img"><img src="img/cw-1.png"/></td>
+                                        <td class="td-left">8小时内最低气温下降8°C以上</td>
+                                        <td>4°C</td>
+                                        <td class="td-right">5级以上</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="td-img"><img src="img/cw-2.png"/></td>
+                                        <td class="td-left"> 24小时内最低气温下降10°C以上</td>
+                                        <td>4°C</td>
+                                        <td class="td-right">6级以上</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="td-img"><img src="img/cw-3.png"/></td>
+                                        <td class="td-left"> 24小时内最低气温下降12°C以上</td>
+                                        <td>0°C</td>
+                                        <td class="td-right">6级以上</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="td-img"><img src="img/cw-4.png"/></td>
+                                        <td class="td-left"> 24小时内最低气温下降16°C以上</td>
+                                        <td>0°C</td>
+                                        <td class="td-right">6级以上</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="effect-area">
+                        <div id="effect-chart"></div>
+                    </div>
+                    <div class="city-detail-area">
+                        <div class="city-detail-container">
+                            <div class="city-info">
+                                <div class="city-head">
+                                    <span class="city-name"></span>
+                                    <i class="icon-close"></i>
+                                </div>
+                            </div>
+                            <div class="content">
+                                <div class="text-head"></div>
+                                <div class="text-content"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="info-area">
+                        <div class="info">
+                            部分地区受寒潮影响情况
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="section" id="section-4" data-anchor="page-4">
+                <div class="container">
+                    <div class="text-area">
+                        寒潮的成因通常较为复杂，它与<em class="em">全球气候</em>变化密不可分
+                    </div>
+                    <div class="tab-area">
+                        <ul class="tab-index index-list">
+                            <li class="list-item">
+                                <a href="javascript:void(0)">过去近40年全球海面冰层变化情况</a>
+                            </li>
+                            <li class="list-item">
+                                <a href="javascript:void(0);">过去近20年亚洲1月份平均气温</a>
+                            </li>
+                        </ul>
+                        <ul class="tab-content content-list">
+                            <li class="list-item">
+                                <div id="ice-chart"></div>
+                            </li>
+                            <li class="list-item">
+                                <div id="air-chart"></div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="section" id="section-5" data-anchor="page-5">
+                <div class="text-area">
+                    <div class="group">
+                        <span class="label">数据来源：</span>
+                        <span class="content">
+                            <a href="http://www.nmc.cn/" target="_blank">中央气象台</a><br/>
+                            <a href="http://www.giss.nasa.gov/" target="_blank">NASA’s Goddard Institute for Space</a><br/>
+                            <a href="http://www.ncdc.noaa.gov/" target="_blank">NOAA（美国国家海洋和大气管理局）</a><br/>
+                        </span>
+                    </div>
+                    <div class="group">
+                        <span class="label">内容整理：</span>
+                        <span class="content">赵钒君 张延坤</span>
+                    </div>
+                    <div class="group">
+                        <span class="label">网页设计：</span>
+                        <span class="content">高晓宇</span>
+                    </div>
+                    <div class="group">
+                        <span class="label">网页制作：</span>
+                        <span class="content">孙立人</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script src="js/script.js"></script>
     </body>
 </html>
