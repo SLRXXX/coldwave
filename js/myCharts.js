@@ -2,7 +2,7 @@
 * @Author: slr
 * @Date:   2016-03-23 14:53:57
 * @Last Modified by:   slr
-* @Last Modified time: 2016-03-25 20:24:15
+* @Last Modified time: 2016-03-26 10:50:51
 */
 
 'use strict';
@@ -60,6 +60,9 @@ var initMapChart = function (callback) {
                 min: -30,
                 max: 30,
                 calculable: true,
+                itemWidth: 10,
+                left: '8%',
+                bottom: '8%',
                 color: ['#e89183', '#c0da70', '#318fd1'],
                 //color: ['#d7eeff','#318fd1','#023960'],
                 textStyle: {
@@ -405,7 +408,7 @@ var initEffectChart = function (callback) {
                 $('.city-detail-area').slideDown();
                 $('.city-detail-area .city-name').text(cityname);
                 $('.city-detail-area .content .text-head').text(data.head);
-                $('.city-detail-area .content .text-content').html(data.content.replace('\n', '<br/>'));
+                $('.city-detail-area .content .text-content').html('<p>' + data.content.replace('\n', '</p><p>') + '</p>');
 
             }
         };
