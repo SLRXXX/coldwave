@@ -2,7 +2,7 @@
 * @Author: slr
 * @Date:   2016-03-20 09:08:00
 * @Last Modified by:   slr
-* @Last Modified time: 2016-03-26 12:19:23
+* @Last Modified time: 2016-03-26 13:34:29
 */
 
 'use strict';
@@ -83,7 +83,7 @@ var init = function () {
         menu: '#top-nav',
         navigation: true,
         navigationPosition: 'right',
-        navigationTooltips: ['简介', '全国气温', '事件', '全球气候', '说明'],
+        navigationTooltips: ['简介', '全国气温', '影响', '成因', '说明'],
         scrollOverflow: true,
         afterLoad: function(anchorLink, index){
             switch(anchorLink) {
