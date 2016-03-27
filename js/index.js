@@ -2,7 +2,7 @@
 * @Author: slr
 * @Date:   2016-03-20 09:08:00
 * @Last Modified by:   slr
-* @Last Modified time: 2016-03-26 13:34:29
+* @Last Modified time: 2016-03-27 11:20:28
 */
 
 'use strict';
@@ -83,7 +83,8 @@ var init = function () {
         menu: '#top-nav',
         navigation: true,
         navigationPosition: 'right',
-        navigationTooltips: ['简介', '全国气温', '影响', '成因', '说明'],
+        navigationTooltips: ['简介', '表现', '影响', '成因', '说明'],
+        lockAnchors: true,
         scrollOverflow: true,
         afterLoad: function(anchorLink, index){
             switch(anchorLink) {
@@ -92,6 +93,9 @@ var init = function () {
                 case 'page-3': initPageThree();break;
                 case 'page-4': initPageFour();break;
             }
+        },
+        onLeave: function (index, nextIndex, direction) {
+            ;
         }
     });
 

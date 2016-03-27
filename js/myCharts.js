@@ -2,7 +2,7 @@
 * @Author: slr
 * @Date:   2016-03-23 14:53:57
 * @Last Modified by:   slr
-* @Last Modified time: 2016-03-26 12:22:29
+* @Last Modified time: 2016-03-27 11:18:12
 */
 
 'use strict';
@@ -452,113 +452,113 @@ var initIceChart = function () {
     }
     var myChart = echarts.init($('#ice-chart')[0]);
     myChart.showLoading('default', OPTIONS.loading);
-    $.get('data/ice.json').then(function (iceJson) {
-        myChart.hideLoading();
-        var data = renderData(iceJson.data);
-        var option = {
-            type: 'line',
-            tooltip: {
-                trigger: 'axis',
+
+    var iceJson = window.DATA.iceData;
+    myChart.hideLoading();
+    var data = renderData(iceJson.data);
+    var option = {
+        type: 'line',
+        tooltip: {
+            trigger: 'axis',
+            textStyle: {
+                fontSize: 11
+            },
+            formatter: '{b}年<br/>{a}: {c}',
+            axisPointer: {
+                lineStyle: {
+                    color: '#89b4d5'
+                }
+            }
+        },
+        xAxis:  {
+            type: 'category',
+            data: data.years,
+            name: '年份',
+            nameLocatoin: 'end',
+            nameGap: 8,
+            axisLabel: {
                 textStyle: {
+                    color: '#fff',
+                    fontSize: 12
+                }
+            },
+            splitLine: {
+                show: false
+            },
+            axisTick: {
+                show: false
+            },
+            axisLine: {
+                lineStyle: {
+                    color: '#89b4d5'
+                }
+            }
+        },
+        yAxis: {
+            type: 'value',
+            name: '　　　　　冰层面积(百万平方米)',
+            nameLocatoin: 'end',
+            nameGap: 10,
+            scale: true,
+            min: 'dataMin',
+            axisLabel: {
+                formatter: '{value}',
+                textStyle: {
+                    color: '#fff',
                     fontSize: 11
-                },
-                formatter: '{b}年<br/>{a}: {c}',
-                axisPointer: {
-                    lineStyle: {
-                        color: '#89b4d5'
-                    }
                 }
             },
-            xAxis:  {
-                type: 'category',
-                data: data.years,
-                name: '年份',
-                nameLocatoin: 'end',
-                nameGap: 8,
-                axisLabel: {
-                    textStyle: {
+            splitLine: {
+                show: false
+            },
+            axisLine: {
+                lineStyle: {
+                    color: '#89b4d5'
+                }
+            },
+            axisTick: {
+                lineStyle: {
+                    color: '#89b4d5'
+                },
+                show: false
+            }
+        },
+        grid: {
+            top: '15%',
+            left: '2%',
+            bottom: '8%',
+            right: '8%',
+            containLabel: true
+        },
+        backgroundColor: '#2462a2',
+        series: [
+            {
+                name:'冰层面积',
+                type:'line',
+                data: data.values,
+                lineStyle: {
+                    normal: {
+                        lineColor: '#fff'
+                    }
+                },
+                itemStyle: {
+                    normal: {
                         color: '#fff',
-                        fontSize: 12
-                    }
-                },
-                splitLine: {
-                    show: false
-                },
-                axisTick: {
-                    show: false
-                },
-                axisLine: {
-                    lineStyle: {
-                        color: '#89b4d5'
-                    }
-                }
-            },
-            yAxis: {
-                type: 'value',
-                name: '　　　　　冰层面积(百万平方米)',
-                nameLocatoin: 'end',
-                nameGap: 10,
-                scale: true,
-                min: 'dataMin',
-                axisLabel: {
-                    formatter: '{value}',
-                    textStyle: {
-                        color: '#fff',
-                        fontSize: 11
-                    }
-                },
-                splitLine: {
-                    show: false
-                },
-                axisLine: {
-                    lineStyle: {
-                        color: '#89b4d5'
-                    }
-                },
-                axisTick: {
-                    lineStyle: {
-                        color: '#89b4d5'
+                        opacity: 0
                     },
-                    show: false
-                }
-            },
-            grid: {
-                top: '15%',
-                left: '2%',
-                bottom: '8%',
-                right: '8%',
-                containLabel: true
-            },
-            backgroundColor: '#2462a2',
-            series: [
-                {
-                    name:'冰层面积',
-                    type:'line',
-                    data: data.values,
-                    lineStyle: {
-                        normal: {
-                            lineColor: '#fff'
-                        }
-                    },
-                    itemStyle: {
-                        normal: {
-                            color: '#fff',
-                            opacity: 0
-                        },
-                        emphasis: {
-                            opacity: 1
-                        }
-                    },
-                    areaStyle: {
-                        normal: {
-                            color: '#fff'
-                       }
-                   },
-                }
-            ]
-        };
-        myChart.setOption(option);
-    });
+                    emphasis: {
+                        opacity: 1
+                    }
+                },
+                areaStyle: {
+                    normal: {
+                        color: '#fff'
+                   }
+               },
+            }
+        ]
+    };
+    myChart.setOption(option);
 };
 
 var initAirChart = function () {
@@ -578,109 +578,110 @@ var initAirChart = function () {
     };
     var myChart = echarts.init($('#air-chart')[0]);
     myChart.showLoading('default', OPTIONS.loading);
-    $.get('data/air.json').then(function (airJson) {
-        myChart.hideLoading();
-        var data = renderData(airJson.data);
-        var option = {
-            type: 'line',
-            tooltip: {
-                trigger: 'axis',
+
+    var airJson = window.DATA.airData;
+    myChart.hideLoading();
+    var data = renderData(airJson.data);
+    var option = {
+        type: 'line',
+        tooltip: {
+            trigger: 'axis',
+            textStyle: {
+                fontSize: 11
+            },
+            formatter: '{b}年1月<br/>{a}: {c}°C',
+            axisPointer: {
+                lineStyle: {
+                    color: '#89b4d5'
+                }
+            }
+        },
+        xAxis:  {
+            type: 'category',
+            data: data.years,
+            name: '年份',
+            nameLocatoin: 'end',
+            nameGap: 8,
+            axisLabel: {
                 textStyle: {
+                    color: '#fff',
+                    fontSize: 12
+                }
+            },
+            splitLine: {
+                show: false
+            },
+            axisTick: {
+                show: false
+            },
+            axisLine: {
+                lineStyle: {
+                    color: '#89b4d5'
+                }
+            }
+        },
+        yAxis: {
+            type: 'value',
+            name: '气温(°C)',
+            nameLocatoin: 'end',
+            nameGap: 10,
+            axisLabel: {
+                formatter: '{value}',
+                textStyle: {
+                    color: '#fff',
                     fontSize: 11
-                },
-                formatter: '{b}年1月<br/>{a}: {c}°C',
-                axisPointer: {
-                    lineStyle: {
-                        color: '#89b4d5'
-                    }
                 }
             },
-            xAxis:  {
-                type: 'category',
-                data: data.years,
-                name: '年份',
-                nameLocatoin: 'end',
-                nameGap: 8,
-                axisLabel: {
-                    textStyle: {
+            splitLine: {
+                show: false
+            },
+            axisLine: {
+                lineStyle: {
+                    color: '#89b4d5'
+                }
+            },
+            axisTick: {
+                lineStyle: {
+                    color: '#89b4d5'
+                },
+                show: false
+            }
+        },
+        grid: {
+            top: '15%',
+            left: '2%',
+            bottom: '8%',
+            right: '8%',
+            containLabel: true
+        },
+        backgroundColor: '#2462a2',
+        series: [
+            {
+                name:'气温',
+                type:'line',
+                data: data.values,
+                lineStyle: {
+                    normal: {
+                        lineColor: '#fff'
+                    }
+                },
+                itemStyle: {
+                    normal: {
                         color: '#fff',
-                        fontSize: 12
-                    }
-                },
-                splitLine: {
-                    show: false
-                },
-                axisTick: {
-                    show: false
-                },
-                axisLine: {
-                    lineStyle: {
-                        color: '#89b4d5'
-                    }
-                }
-            },
-            yAxis: {
-                type: 'value',
-                name: '气温(°C)',
-                nameLocatoin: 'end',
-                nameGap: 10,
-                axisLabel: {
-                    formatter: '{value}',
-                    textStyle: {
-                        color: '#fff',
-                        fontSize: 11
-                    }
-                },
-                splitLine: {
-                    show: false
-                },
-                axisLine: {
-                    lineStyle: {
-                        color: '#89b4d5'
-                    }
-                },
-                axisTick: {
-                    lineStyle: {
-                        color: '#89b4d5'
+                        opacity: 0
                     },
-                    show: false
-                }
-            },
-            grid: {
-                top: '15%',
-                left: '2%',
-                bottom: '8%',
-                right: '8%',
-                containLabel: true
-            },
-            backgroundColor: '#2462a2',
-            series: [
-                {
-                    name:'气温',
-                    type:'line',
-                    data: data.values,
-                    lineStyle: {
-                        normal: {
-                            lineColor: '#fff'
-                        }
-                    },
-                    itemStyle: {
-                        normal: {
-                            color: '#fff',
-                            opacity: 0
-                        },
-                        emphasis: {
-                            opacity: 1
-                        }
-                    },
-                   //  areaStyle: {
-                   //      normal: {
-                   //          color: '#fff'
-                   //     }
-                   // },
-                }
-            ]
-        };
-        myChart.setOption(option);
-    });
+                    emphasis: {
+                        opacity: 1
+                    }
+                },
+               //  areaStyle: {
+               //      normal: {
+               //          color: '#fff'
+               //     }
+               // },
+            }
+        ]
+    };
+    myChart.setOption(option);
+
 };
