@@ -2,11 +2,14 @@
  * @Author: slr
  * @Date:   2016-03-21 09:10:28
  * @Last Modified by:   slr
- * @Last Modified time: 2016-03-26 15:05:49
+ * @Last Modified time: 2016-03-27 11:34:40
  */
 
 'use strict';
-var geoCoordMap = {
+if (typeof(window.DATA) === 'undefined') {
+    window.DATA = {};
+}
+window.DATA.geoCoordMap = {
     '海门': [121.15, 31.89],
     '鄂尔多斯': [109.781327, 39.608266],
     '招远': [120.38, 37.35],
@@ -207,4 +210,4 @@ var geoCoordMap = {
     '香港': [114.1720, 22.2811],
     '澳门': [113.5494, 22.1930],
     '高雄': [120.3830, 22.5655]
-}
+};

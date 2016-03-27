@@ -2,7 +2,7 @@
 * @Author: slr
 * @Date:   2016-03-20 09:01:11
 * @Last Modified by:   slr
-* @Last Modified time: 2016-03-26 12:18:24
+* @Last Modified time: 2016-03-27 11:32:21
 */
 
 'use strict';
@@ -26,7 +26,6 @@ var jsList = [
 ];
 
 // 压缩js库
-
 gulp.task('zipjs', function () {
     gulp.src(jsList)
      .pipe(concat('script.js'))

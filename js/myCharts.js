@@ -2,7 +2,7 @@
 * @Author: slr
 * @Date:   2016-03-23 14:53:57
 * @Last Modified by:   slr
-* @Last Modified time: 2016-03-27 11:18:12
+* @Last Modified time: 2016-03-27 11:38:12
 */
 
 'use strict';
@@ -15,6 +15,7 @@ var COLORS = {
     dc : '#1e5793'
 };
 
+// 公用的 chart option
 var OPTIONS = {};
 OPTIONS.loading = {
     text: '加载中...',
@@ -25,7 +26,6 @@ OPTIONS.loading = {
 };
 
 var CHARTS = {};
-
 
 var initMap = function (callback) {
     if (window.DATA.chinaJson) {
@@ -38,7 +38,6 @@ var initMap = function (callback) {
        });
     }
 };
-
 
 var initMapChart = function (callback) {
     if ($('#map-chart').find('canvas').length > 0) return;
@@ -144,7 +143,7 @@ var initMapChart = function (callback) {
     myChart.convertData = function (data) {
         var res = [];
         for (var i = 0; i < data.length; i++) {
-            var geoCoord = geoCoordMap[data[i].name];
+            var geoCoord = window.DATA.geoCoordMap[data[i].name];
             if (geoCoord) {
                 res.push({
                     name: data[i].name,
@@ -170,12 +169,11 @@ var initMapChart = function (callback) {
     initMap(function (chinaJson) {
         myChart.hideLoading();
         var weatherJson = window.DATA.weatherData;
-        window.DATA.weatherData = weatherJson;
         var data = weatherJson[0].wdata;
         var convertData = function (data) {
             var res = [];
             for (var i = 0; i < data.length; i++) {
-                var geoCoord = geoCoordMap[data[i].name];
+                var geoCoord = window.DATA.geoCoordMap[data[i].name];
                 if (geoCoord) {
                     res.push({
                         name: data[i].name,
@@ -197,7 +195,6 @@ var initMapChart = function (callback) {
     window.CHARTS.mapChart = myChart;
     return myChart;
 };
-
 
 var renderCityChart = function (city) {
     $('.city-chart-area').show();
@@ -683,5 +680,4 @@ var initAirChart = function () {
         ]
     };
     myChart.setOption(option);
-
 };
