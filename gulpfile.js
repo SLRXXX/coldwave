@@ -2,7 +2,7 @@
 * @Author: slr
 * @Date:   2016-03-20 09:01:11
 * @Last Modified by:   slr
-* @Last Modified time: 2016-03-27 11:32:21
+* @Last Modified time: 2016-03-27 14:24:35
 */
 
 'use strict';
@@ -19,6 +19,7 @@ var jsList = [
     'js/jquery.fullPage.js',
     'js/echarts.js',
     'js/data.js',
+    'js/chinaMap.js',
     'js/geoCoordMap.js',
     'js/myCharts.js',
     'js/cursor.js',

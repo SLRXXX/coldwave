@@ -2,7 +2,7 @@
 * @Author: slr
 * @Date:   2016-03-23 14:53:57
 * @Last Modified by:   slr
-* @Last Modified time: 2016-03-27 11:38:12
+* @Last Modified time: 2016-03-27 14:34:46
 */
 
 'use strict';
@@ -31,11 +31,12 @@ var initMap = function (callback) {
     if (window.DATA.chinaJson) {
         callback(window.DATA.chinaJson);
     } else {
-        $.get('data/china.json').then(function (chinaJson) {
-           window.DATA.chinaJson = chinaJson;
-           echarts.registerMap('china', chinaJson);
-           callback(chinaJson);
-       });
+        //$.get('data/china.json').then(function (chinaJson) {
+        //   window.DATA.chinaJson = chinaJson;
+            var chinaJson = window.DATA.chinaJson = window.DATA.chinaMap;
+            echarts.registerMap('china', chinaJson);
+            callback(chinaJson);
+       //});
     }
 };
 
